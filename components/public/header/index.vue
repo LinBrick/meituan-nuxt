@@ -2,6 +2,7 @@
   <div class="header-bar">
     <div class="header-content clearfix">
       <geo />
+      <my-nav />
     </div>
   </div>
   <!-- <el-row :gutter="20" class="com-header">
@@ -13,9 +14,12 @@
 
 <script>
 import Geo from './geo'
+import MyNav from './nav'
+
 export default {
   components: {
-    Geo
+    Geo,
+    MyNav
   }
 }
 </script>

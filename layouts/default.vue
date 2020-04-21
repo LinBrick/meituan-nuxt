@@ -1,13 +1,13 @@
 <template>
-  <el-container>
-    <el-header class="com-header">
+  <div class="mt-container">
+    <header class="com-header">
       <my-header />
-    </el-header>
-    <el-main>
+    </header>
+    <main>
       <nuxt />
-    </el-main>
-    <el-footer>Footer</el-footer>
-  </el-container>
+    </main>
+    <footer>Footer</footer>
+  </div>
 </template>
 
 <script>
