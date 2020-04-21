@@ -22,11 +22,14 @@
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9",
     "@nuxtjs/eslint-config": "^2.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.1.0",
-    "eslint-plugin-nuxt": ">=0.4.2"
+    "eslint-plugin-nuxt": ">=0.4.2",
+    "eslint-plugin-unicorn": "^18.0.1",
+    "nodemon": "^1.18.9",
+    "node-sass": "^4.7.2",
+    "sass-loader": "7.0.3"
   }
 }
