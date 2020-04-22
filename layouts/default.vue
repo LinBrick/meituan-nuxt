@@ -3,10 +3,9 @@
     <header class="com-header">
       <my-header />
     </header>
-    <main>
+    <div id="react">
       <nuxt />
-    </main>
-    <footer>Footer</footer>
+    </div>
   </div>
 </template>
 

@@ -1,12 +1,18 @@
 <template>
-  <div class="container">
-    body
+  <div class="page index">
+    <div class="index-container">
+      <my-banner />
+    </div>
   </div>
 </template>
 
 <script>
-export default {
+import MyBanner from '@/components/home/banner/index'
 
+export default {
+  components: {
+    MyBanner
+  }
 }
 </script>
 
