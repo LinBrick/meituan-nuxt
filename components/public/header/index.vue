@@ -1,25 +1,25 @@
 <template>
-  <div class="header-bar">
-    <div class="header-content clearfix">
-      <geo />
-      <my-nav />
+  <div>
+    <div class="header-bar">
+      <div class="header-content clearfix">
+        <geo />
+        <my-nav />
+      </div>
     </div>
+    <search />
   </div>
-  <!-- <el-row :gutter="20" class="com-header">
-    <el-col :span="6">
-      <geo />
-    </el-col>
-  </el-row> -->
 </template>
 
 <script>
 import Geo from './geo'
 import MyNav from './nav'
+import Search from './search'
 
 export default {
   components: {
     Geo,
-    MyNav
+    MyNav,
+    Search
   }
 }
 </script>
