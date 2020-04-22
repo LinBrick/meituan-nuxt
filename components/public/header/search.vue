@@ -15,26 +15,32 @@
           type="text"
           placeholder="搜索商家或地点"
           @focus="searchKeyword"
-          @blur="showSearchSuggest=false"
+          @blur="isFocus=false"
         >
         <button class="header-search-btn">
           <i class="iconfont iconsousuo" />
         </button>
       </div>
-      <div class="header-search-suggest" :class="{block:showSearchSuggest}">
-        <div class="header-search-noinput">
+      <div class="header-search-suggest" :class="{block:isFocus}">
+        <div v-if="isHotPlace" class="header-search-noinput">
           <div class="header-search-history" style="display: block;">
             <h6>最近搜索</h6>
             <span class="header-search-clean">删除搜索历史</span>
             <ul>
-              <li><a href="https://bj.meituan.com/s/%E5%A4%A7%E5%98%B4%E7%8C%AB/">大嘴猫</a></li>
+              <li v-for="(item,index) in hotPlaceList" :key="index">
+                <a href="#">{{ item }}</a>
+              </li>
             </ul>
           </div>
           <h6>热门搜索</h6>
           <div class="header-search-hotword" />
         </div>
-        <div class="header-search-hasinput">
-          <ul />
+        <div v-if="isSearchList" class="header-search-hasinput">
+          <ul>
+            <li v-for="(item,index) in searchList" :key="index">
+              <a href="#">{{ item }}</a>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="header-search-hotword" />
@@ -47,14 +53,29 @@ export default {
   data () {
     return {
       keyword: '',
-      showSearchSuggest: false,
-      searchResultList: []
+      isFocus: false,
+      hotPlaceList: ['火锅', '蹦迪'],
+      searchList: ['动物园', '大嘴猫']
+    }
+  },
+  computed: {
+    isHotPlace () {
+      return this.isFocus && this.keyword.trim() === ''
+    },
+    isSearchList () {
+      return this.isFocus && this.keyword.trim() !== ''
     }
   },
   methods: {
     searchKeyword () {
-      this.showSearchSuggest = true
+      this.isFocus = true
     }
   }
 }
 </script>
+
+<style lang="scss">
+.com-header .header-search-module .header-search-suggest .header-search-hasinput{
+  display: block !important;
+}
+</style>
