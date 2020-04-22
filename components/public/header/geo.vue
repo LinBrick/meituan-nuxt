@@ -1,7 +1,10 @@
 <template>
   <div class="header-bar-position" style="display: block;">
     <i class="iconfont iconlocation" />
-    <span class="current-city">北京</span><a class="change-city" href="#">切换城市</a>
+    <span class="current-city">北京</span>
+    <nuxt-link class="change-city" to="/changeCity">
+      切换城市
+    </nuxt-link>
     <div class="near-citys">
       [<a class="city-guess" href="#">门头沟区</a>
       <a class="city-guess" href="#">大厂回族自治县</a>
