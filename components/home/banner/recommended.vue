@@ -4,7 +4,7 @@
       <div class="item banner-slider shadow">
         <div id="banner-slider" class="slider">
           <el-carousel indicator-position="outside">
-            <el-carousel-item v-for="item in bannerList" :key="item">
+            <el-carousel-item v-for="(item,index) in bannerList" :key="index">
               <nuxt-link to="/">
                 <el-image :src="item.url" />
               </nuxt-link>
