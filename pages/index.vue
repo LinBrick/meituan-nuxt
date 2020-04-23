@@ -4,6 +4,7 @@
       <my-banner />
       <movie-recommend />
       <recommend />
+      <guess-you-like />
       <mt-navigation />
     </div>
   </div>
@@ -14,13 +15,15 @@ import MyBanner from '@/components/home/banner/index'
 import MovieRecommend from '@/components/home/movieRecommend/index'
 import MtNavigation from '@/components/home/mtNavigation/index'
 import Recommend from '@/components/home/recommend/index'
+import GuessYouLike from '@/components/home/guessYouLike/index'
 
 export default {
   components: {
     MyBanner,
     MovieRecommend,
-    MtNavigation,
-    Recommend
+    Recommend,
+    GuessYouLike,
+    MtNavigation
   }
 }
 </script>
