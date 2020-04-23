@@ -87,7 +87,13 @@
                 @focus="inputFocus"
               >
               <div class="form-field form-field--verify-mobile" style="top:19px;">
-                <input id="J-verify-btn" type="button" class="btn-normal btn-mini" :value="getVerifgCodeButtonText" @click="getVerifgCode">
+                <input
+                  type="button"
+                  class="btn-normal btn-mini"
+                  :class="{'btn-disabled':disabled}"
+                  :value="getVerifgCodeButtonText"
+                  @click="getVerifgCode"
+                >
               </div>
             </div>
             <div class="form-field form-field--info">
@@ -174,6 +180,9 @@ export default {
       } else {
         return this.intervalTime ? `重新获取(${this.intervalTime})` : '重新获取'
       }
+    },
+    disabled () {
+      return this.intervalId !== null
     }
   },
   methods: {
@@ -203,10 +212,15 @@ export default {
     },
     // 获取手机验证码
     getVerifgCode () {
+      if (this.disabled) { return }
+      if (!validateMobile(this.mobileNumber)) {
+        this.errMsg = '请输入正确的手机号'
+        return
+      }
       if (this.intervalId !== null) { return }
       this.verifyTip = '已发送，1分钟后可重新获取'
       this.countverifyCode++
-      this.intervalTime = 5
+      this.intervalTime = 60
       this.intervalId = setInterval(() => {
         if (--this.intervalTime === 0) {
           clearInterval(this.intervalId)
@@ -232,5 +246,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/meituan-css/login.css'
+@import '@/assets/meituan-css/login.css';
 </style>
