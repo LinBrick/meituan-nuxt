@@ -3,6 +3,7 @@
     <div class="index-container">
       <my-banner />
       <movie-recommend />
+      <recommend />
       <mt-navigation />
     </div>
   </div>
@@ -12,12 +13,14 @@
 import MyBanner from '@/components/home/banner/index'
 import MovieRecommend from '@/components/home/movieRecommend/index'
 import MtNavigation from '@/components/home/mtNavigation/index'
+import Recommend from '@/components/home/recommend/index'
 
 export default {
   components: {
     MyBanner,
     MovieRecommend,
-    MtNavigation
+    MtNavigation,
+    Recommend
   }
 }
 </script>
