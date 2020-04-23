@@ -127,4 +127,15 @@ router.post('./verify', async (ctx, next) => {
     subject: '《高仿美团网nuxt实战》注册码',
     html: `您在《高仿美团网nuxt实战》中注册，您的邀请码是${ko.code}`
   }
+  await transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log('error')
+    } else {
+      Store.hmset(`nodemail:${ko.user}`, 'code', ko.code, 'expire', ko.expire, 'email', ko.email)
+    }
+  })
+  ctx.body = {
+    code: 0,
+    msg: '验证码已发送'
+  }
 })
