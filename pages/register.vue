@@ -290,4 +290,9 @@ export default {
 .form-field--pwd{
     padding-bottom: 27px !important;
 }
+.theme--www .header--mini .site-logo{
+  width: 128px;
+  background: url(https://s0.meituan.net/bs/file/?f=fe-sso-fs:build/assets/logo.6a89007.png) no-repeat;
+  background-size: contain;
+}
 </style>
