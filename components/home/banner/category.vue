@@ -18,7 +18,12 @@
           </li>
         </ul>
       </div>
-      <div class="category-nav-detail-wrapper" :class="{active:detailActive}" @mouseenter="hideCategoryDetails">
+      <div
+        class="category-nav-detail-wrapper"
+        :class="{active:detailActive}"
+        @mouseenter="detailsEnter"
+        @mouseleave="detailsLeave"
+      >
         <div class="category-nav-detail active">
           <div class="detail-area">
             <div class="detail-title-wrapper clearfix">
@@ -85,7 +90,8 @@
 export default {
   data () {
     return {
-      detailActive: false
+      detailActive: false,
+      timer: null
     }
   },
   methods: {
@@ -93,6 +99,17 @@ export default {
       this.detailActive = true
     },
     hideCategoryDetails () {
+      this.timer = setTimeout(() => {
+        this.detailActive = false
+      }, 200)
+    },
+    detailsEnter () {
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+      this.detailActive = true
+    },
+    detailsLeave () {
       this.detailActive = false
     }
   }
