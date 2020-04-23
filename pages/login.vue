@@ -106,7 +106,7 @@
                 @click="ordinaryLogin"
               >
             </div>
-            <p class="J-treaty-block treaty-block" style="display:none">
+            <p class="J-treaty-block treaty-block">
               提示：未注册美团账号的手机号，登录时将自动注册美团账号，且代表您已同意<a id="meituanTos" href="#" class="j-terms" target="_blank">《美团点评用户服务协议》</a><a id="meituanTos" href="#" class="j-terms" target="_blank">《美团点评隐私政策》</a>
             </p>
           </form>
@@ -129,18 +129,18 @@
       <div class="site-info-nav cf">
         <ul>
           <li class="first">
-            <a rel="nofollow" href="https://about.meituan.com/about.html">关于美团</a>
+            <a rel="nofollow" href="#">关于美团</a>
           </li>
-          <li><a rel="nofollow" href="https://zhaopin.meituan.com/">加入我们</a></li>
-          <li><a rel="nofollow" href="http://emis.meishi.meituan.com/merchantsSettled">商家入驻</a></li>
-          <li><a rel="nofollow" href="https://www.meituan.com/help/faq">帮助中心</a></li>
+          <li><a rel="nofollow" href="#">加入我们</a></li>
+          <li><a rel="nofollow" href="#">商家入驻</a></li>
+          <li><a rel="nofollow" href="#">帮助中心</a></li>
           <li class="last">
-            <a href="http://meituan.com/mobile">美团手机版</a>
+            <a href="#">美团手机版</a>
           </li>
         </ul>
       </div>
       <div class="copyright">
-        <p> &copy;<span>2020</span> <a href="https://www.meituan.com">美团网团购</a> meituan.com <a href="http://www.miibeian.gov.cn/" target="_blank">京ICP证070791号</a> 京公网安备11010502025545号 </p>
+        <p> &copy;<span>2020</span> <a href="#">美团网团购</a> meituan.com <a href="#" target="_blank">京ICP证070791号</a> 京公网安备1101210502025545号 </p>
       </div>
     </footer>
   </div>
