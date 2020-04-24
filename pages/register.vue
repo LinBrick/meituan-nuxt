@@ -2,7 +2,6 @@
   <div class="pg-unitive-signup theme--www">
     <header class="header--mini">
       <div class="wrapper cf">
-        <!-- <a class="site-logo" href="http://www.meituan.com">美团</a> -->
         <nuxt-link class="site-logo" to="/">
           美团
         </nuxt-link>
@@ -87,7 +86,9 @@
 </template>
 
 <script>
+import CryptoJS from 'crypto-js'
 import { validateMobile } from '@/utils/validate'
+import request from '@/utils/request'
 
 export default {
   layout: 'blank',
@@ -260,16 +261,28 @@ export default {
       if (this.disabled) { return }
       if (this.mobileErrMsg !== '') { return }
       if (this.intervalId !== null) { return }
-      this.verifyTip = '已发送，1分钟后可重新获取'
-      this.countverifyCode++
-      this.intervalTime = 60
-      this.intervalId = setInterval(() => {
-        if (--this.intervalTime === 0) {
-          clearInterval(this.intervalId)
-          this.intervalId = null
-          this.verifyTip = ''
+      request({
+        url: '/users/verify',
+        method: 'post',
+        data: {
+          mobilePhone: this.mobile
         }
-      }, 1000)
+      }).then(({ status, data }) => {
+        if (status === 200 && data && data.code === 0) {
+          this.verifyTip = '已发送，1分钟后可重新获取'
+          this.countverifyCode++
+          this.intervalTime = 60
+          this.intervalId = setInterval(() => {
+            if (--this.intervalTime === 0) {
+              clearInterval(this.intervalId)
+              this.intervalId = null
+              this.verifyTip = ''
+            }
+          }, 1000)
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
     },
     // 开始注册
     actionRegister () {
@@ -278,7 +291,23 @@ export default {
       this.passwordValidate()
       this.password2Validate()
       if (!this.showMobileError && !this.showVerifycodeError && !this.showPasswordError && !this.showPassword2Error) {
-
+        request({
+          url: '/users/signup',
+          method: 'post',
+          data: {
+            mobilePhone: this.mobile,
+            username: '小明',
+            password: CryptoJS.MD5(this.password).toString(),
+            code: this.verifycode
+          }
+        }).then(({ status, data }) => {
+          if (status === 200 && data && data.code === 0) {
+            this.$message.success('注册成功')
+            // window.location.href = '/login'
+          } else {
+            this.$message.error(data.msg)
+          }
+        })
       }
     }
   }

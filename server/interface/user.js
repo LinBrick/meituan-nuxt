@@ -1,6 +1,6 @@
 import Router from 'koa-router'
 import Redis from 'koa-redis'
-import nodeMailer from 'nodemnpailer'
+import nodeMailer from 'nodemailer'
 import User from '../dbs/models/users'
 import Email from '../dbs/config'
 import Passport from './utils/passport'
@@ -11,6 +11,7 @@ const router = new Router({
 })
 
 const Store = new Redis().client
+const targetMail = '13431720029@163.com'
 
 router.post('/signup', async (ctx) => {
   const { mobilePhone, username, password, code } = ctx.request.body
@@ -53,27 +54,33 @@ router.post('/signup', async (ctx) => {
     username,
     password
   })
+
   if (nuser) {
-    const res = await axios.post('/users/signin', {
-      mobilePhone,
-      password
-    })
-    if (res.data && res.data.code === 0) {
-      ctx.body = {
-        code: 0,
-        msg: '注册成功',
-        mobilePhone: res.data.mobilePhone
-      }
-    } else {
-      ctx.body = {
-        code: -1,
-        msg: 'error'
-      }
+    ctx.body = {
+      code: 0,
+      msg: '注册成功',
+      mobilePhone
     }
+    // const res = await axios.post('/users/signin', {
+    //   mobilePhone,
+    //   password
+    // })
+    // if (res.data && res.data.code === 0) {
+    //   ctx.body = {
+    //     code: 0,
+    //     msg: '注册成功',
+    //     mobilePhone: res.data.mobilePhone
+    //   }
+    // } else {
+    //   ctx.body = {
+    //     code: -1,
+    //     msg: 'error'
+    //   }
+    // }
   }
 })
 
-router.post('/signin', async (ctx, next) => {
+router.post('/signin', (ctx, next) => {
   return Passport.authenticate('local', function (err, user, info, status) {
     if (err) {
       ctx.body = {
@@ -96,7 +103,7 @@ router.post('/signin', async (ctx, next) => {
   })(ctx, next)
 })
 
-router.post('./verify', async (ctx, next) => {
+router.post('/verify', async (ctx, next) => {
   const mobilePhone = ctx.request.body.mobilePhone
   const saveExpire = await Store.hget(`nodemail:${mobilePhone}`, 'expire')
   if (saveExpire && new Date().getTime() - saveExpire < 0) {
@@ -118,7 +125,7 @@ router.post('./verify', async (ctx, next) => {
   const ko = {
     code: Email.smtp.code(),
     expire: Email.smtp.expire(),
-    email: 'zhongcheng51@foxmail.com',
+    email: targetMail,
     mobilePhone: ctx.request.body.mobilePhone
   }
   const mailOptions = {
@@ -139,3 +146,35 @@ router.post('./verify', async (ctx, next) => {
     msg: '验证码已发送'
   }
 })
+
+router.get('/exit', async (ctx, next) => {
+  await ctx.logout()
+  if (!ctx.isAuthenticated()) {
+    ctx.body = {
+      code: 0
+    }
+  } else {
+    ctx.body = {
+      code: -1
+    }
+  }
+})
+
+router.post('/getUser', (ctx, next) => {
+  if (ctx.isAuthenticated()) {
+    const { mobilePhone, email } = ctx.session.Passport.user
+    ctx.body = {
+      code: 0,
+      mobilePhone,
+      email
+    }
+  } else {
+    ctx.body = {
+      code: -1,
+      mobilePhone: '',
+      email: ''
+    }
+  }
+})
+
+export default router
