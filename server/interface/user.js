@@ -56,27 +56,27 @@ router.post('/signup', async (ctx) => {
   })
 
   if (nuser) {
-    ctx.body = {
-      code: 0,
-      msg: '注册成功',
-      mobilePhone
-    }
-    // const res = await axios.post('/users/signin', {
-    //   mobilePhone,
-    //   password
-    // })
-    // if (res.data && res.data.code === 0) {
-    //   ctx.body = {
-    //     code: 0,
-    //     msg: '注册成功',
-    //     mobilePhone: res.data.mobilePhone
-    //   }
-    // } else {
-    //   ctx.body = {
-    //     code: -1,
-    //     msg: 'error'
-    //   }
+    // ctx.body = {
+    //   code: 0,
+    //   msg: '注册成功',
+    //   mobilePhone
     // }
+    const res = await axios.post('/users/signin', {
+      username: mobilePhone,
+      password
+    })
+    if (res.data && res.data.code === 0) {
+      ctx.body = {
+        code: 0,
+        msg: '注册成功',
+        mobilePhone: res.data.username
+      }
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: 'error'
+      }
+    }
   }
 })
 
@@ -89,7 +89,7 @@ router.post('/signin', (ctx, next) => {
       }
     } else if (user) {
       ctx.body = {
-        code: -1,
+        code: 0,
         msg: '登陆成功',
         user
       }
@@ -162,17 +162,15 @@ router.get('/exit', async (ctx, next) => {
 
 router.post('/getUser', (ctx, next) => {
   if (ctx.isAuthenticated()) {
-    const { mobilePhone, email } = ctx.session.Passport.user
+    const { mobilePhone } = ctx.session.passport.user
     ctx.body = {
       code: 0,
-      mobilePhone,
-      email
+      mobilePhone
     }
   } else {
     ctx.body = {
       code: -1,
-      mobilePhone: '',
-      email: ''
+      mobilePhone: ''
     }
   }
 })

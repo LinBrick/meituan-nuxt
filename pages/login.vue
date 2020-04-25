@@ -153,7 +153,9 @@
 </template>
 
 <script>
+import CryptoJS from 'crypto-js'
 import { validateMobile } from '@/utils/validate'
+import request from '@/utils/request'
 
 export default {
   layout: 'blank',
@@ -232,7 +234,20 @@ export default {
     // 普通登录
     ordinaryLogin () {
       if (this.validateInfo()) {
-
+        request({
+          url: '/users/signin',
+          method: 'post',
+          data: {
+            username: this.mobileNumber,
+            password: CryptoJS.MD5(this.password).toString()
+          }
+        }).then(({ status, data }) => {
+          if (status === 200 && data && data.code === 0) {
+            window.location.href = '/'
+          } else {
+            this.errMsg = data.msg
+          }
+        })
       }
     },
     // 手机验证码登录

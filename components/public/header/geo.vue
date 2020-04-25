@@ -11,10 +11,10 @@
       <a class="city-guess" href="https://lf.meituan.com">廊坊</a>]
     </div>
     <div v-if="hasUser" class="user-entry" style="display: inline-block;">
-      <nuxt-link class="growth-entry user-up" to="/login">
+      <nuxt-link class="growth-entry user-up" to="/">
         {{ user }}
       </nuxt-link>
-      <nuxt-link class="extra-entry" to="/register">
+      <nuxt-link class="extra-entry" to="/exit">
         退出
       </nuxt-link>
     </div>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import request from '@/utils/request'
+
 export default {
   data () {
     return {
@@ -39,6 +41,15 @@ export default {
   computed: {
     hasUser () {
       return this.user !== ''
+    }
+  },
+  async mounted (context) {
+    const { status, data } = await request({
+      url: '/users/getUser',
+      method: 'post'
+    })
+    if (status === 200) {
+      this.user = data.mobilePhone
     }
   }
 }

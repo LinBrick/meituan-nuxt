@@ -302,8 +302,7 @@ export default {
           }
         }).then(({ status, data }) => {
           if (status === 200 && data && data.code === 0) {
-            this.$message.success('注册成功')
-            // window.location.href = '/login'
+            window.location.href = '/login'
           } else {
             this.$message.error(data.msg)
           }
