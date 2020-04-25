@@ -16,6 +16,7 @@
           placeholder="搜索商家或地点"
           @focus="searchKeyword"
           @blur="isFocus=false"
+          @input="searchChange"
         >
         <button class="header-search-btn">
           <i class="iconfont iconsousuo" />
@@ -23,22 +24,28 @@
       </div>
       <div class="header-search-suggest" :class="{block:isFocus}">
         <div v-if="isHotPlace" class="header-search-noinput">
-          <div class="header-search-history" style="display: block;">
+          <!-- <div class="header-search-history" style="display: block;">
             <h6>最近搜索</h6>
             <span class="header-search-clean">删除搜索历史</span>
             <ul>
               <li v-for="(item,index) in hotPlaceList" :key="index">
-                <a href="#">{{ item }}</a>
+                <a href="#">{{ item.name }}</a>
+              </li>
+            </ul>
+          </div> -->
+          <h6>热门搜索</h6>
+          <div class="header-search-hotword">
+            <ul>
+              <li v-for="(item,index) in hotPlaceList" :key="index">
+                <a href="#">{{ item.name }}</a>
               </li>
             </ul>
           </div>
-          <h6>热门搜索</h6>
-          <div class="header-search-hotword" />
         </div>
         <div v-if="isSearchList" class="header-search-hasinput">
           <ul>
             <li v-for="(item,index) in searchList" :key="index">
-              <a href="#">{{ item }}</a>
+              <a href="#">{{ item.name }}</a>
             </li>
           </ul>
         </div>
@@ -49,13 +56,16 @@
 </template>
 
 <script>
+import _ from 'lodash'
+import request from '@/utils/request'
+
 export default {
   data () {
     return {
       keyword: '',
       isFocus: false,
-      hotPlaceList: ['火锅', '蹦迪'],
-      searchList: ['动物园', '大嘴猫']
+      hotPlaceList: this.$store.state.home.hotPlace,
+      searchList: []
     }
   },
   computed: {
@@ -69,7 +79,19 @@ export default {
   methods: {
     searchKeyword () {
       this.isFocus = true
-    }
+    },
+    searchChange: _.debounce(async function () {
+      const city = this.$store.state.geo.position.city.replace('市', '')
+      const { data: { top } } = await request({
+        url: '/search/top',
+        method: 'get',
+        params: {
+          input: this.keyword,
+          city
+        }
+      })
+      this.searchList = top.slice(0, 10)
+    }, 300)
   }
 }
 </script>

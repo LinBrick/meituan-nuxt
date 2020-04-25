@@ -1,7 +1,7 @@
 <template>
   <div class="header-bar-position" style="display: block;">
     <i class="iconfont iconlocation" />
-    <span class="current-city">北京</span>
+    <span class="current-city">{{ city }}</span>
     <nuxt-link class="change-city" to="/changeCity">
       切换城市
     </nuxt-link>
@@ -35,6 +35,7 @@ import request from '@/utils/request'
 export default {
   data () {
     return {
+      city: this.$store.state.geo.position.city,
       user: ''
     }
   },
