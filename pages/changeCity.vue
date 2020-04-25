@@ -7,130 +7,38 @@
         </h3>
         <div class="choose-wrap">
           <div class="province-choose">
-            省份<i class="iconfont icon-downarrow" />
-            <div class="mt-provinces">
-              <p>省份</p>
-              <div class="provinces-wrapper clearfix">
-                <div class="province-col">
-                  <span class="mt-province ">山东</span>
-                  <span class="mt-province ">甘肃</span>
-                  <span class="mt-province ">江苏</span>
-                  <span class="mt-province ">北京</span>
-                  <span class="mt-province ">云南</span>
-                  <span class="mt-province ">海南</span>
-                  <span class="mt-province ">浙江</span>
-                  <span class="mt-province ">上海</span>
-                  <span class="mt-province ">天津</span>
-                  <span class="mt-province ">陕西</span>
-                  <span class="mt-province ">新疆</span>
-                  <span class="mt-province ">贵州</span>
-                </div>
-                <div class="province-col">
-                  <span class="mt-province ">安徽</span>
-                  <span class="mt-province ">澳门</span>
-                  <span class="mt-province ">湖南</span>
-                  <span class="mt-province ">河北</span>
-                  <span class="mt-province ">香港</span>
-                  <span class="mt-province ">辽宁</span>
-                  <span class="mt-province ">四川</span>
-                  <span class="mt-province ">宁夏</span>
-                  <span class="mt-province ">吉林</span>
-                  <span class="mt-province ">福建</span>
-                  <span class="mt-province ">湖北</span>
-                  <span class="mt-province ">广东</span>
-                </div>
-                <div class="province-col">
-                  <span class="mt-province ">重庆</span>
-                  <span class="mt-province ">山西</span>
-                  <span class="mt-province ">江西</span>
-                  <span class="mt-province ">黑龙江</span>
-                  <span class="mt-province ">青海</span>
-                  <span class="mt-province ">河南</span>
-                  <span class="mt-province ">台湾</span>
-                  <span class="mt-province ">内蒙古</span>
-                  <span class="mt-province ">西藏</span>
-                  <span class="mt-province ">广西</span>
-                </div>
-              </div>
-            </div>
+            <el-select v-model="province" placeholder="省份" filterable>
+              <el-option
+                v-for="item in provinceList"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
           </div>
-          <div class="city-choose ">
-            城市<i class="iconfont icon-downarrow" />
-            <div class="mt-cities">
-              <p>城市</p>
-              <div class="cities-wrapper clearfix">
-                <div class="city-col">
-                  <a href="//gz.meituan.com" class="link mt-city">广州</a>
-                  <a href="//sz.meituan.com" class="link mt-city">深圳</a>
-                  <a href="//dg.meituan.com" class="link mt-city">东莞</a>
-                  <a href="//fs.meituan.com" class="link mt-city">佛山</a>
-                  <a href="//zh.meituan.com" class="link mt-city">珠海</a>
-                  <a href="//zs.meituan.com" class="link mt-city">中山</a>
-                  <a href="//st.meituan.com" class="link mt-city">汕头</a>
-                  <a href="//sg.meituan.com" class="link mt-city">韶关</a>
-                  <a href="//jm.meituan.com" class="link mt-city">江门</a>
-                  <a href="//zhanjiang.meituan.com" class="link mt-city">湛江</a>
-                  <a href="//mm.meituan.com" class="link mt-city">茂名</a>
-                  <a href="//zq.meituan.com" class="link mt-city">肇庆</a>
-                </div>
-                <div class="city-col">
-                  <a href="//huizhou.meituan.com" class="link mt-city">惠州</a>
-                  <a href="//mz.meituan.com" class="link mt-city">梅州</a>
-                  <a href="//sw.meituan.com" class="link mt-city">汕尾</a>
-                  <a href="//heyuan.meituan.com" class="link mt-city">河源</a>
-                  <a href="//yj.meituan.com" class="link mt-city">阳江</a>
-                  <a href="//qingyuan.meituan.com" class="link mt-city">清远</a>
-                  <a href="//chaozhou.meituan.com" class="link mt-city">潮州</a>
-                  <a href="//jy.meituan.com" class="link mt-city">揭阳</a>
-                  <a href="//yf.meituan.com" class="link mt-city">云浮</a>
-                  <a href="//sd.meituan.com" class="link mt-city">顺德</a>
-                  <a href="//conghua.meituan.com" class="link mt-city">从化</a>
-                  <a href="//huidong.meituan.com" class="link mt-city">惠东</a>
-                </div>
-                <div class="city-col">
-                  <a href="//huiyang.meituan.com" class="link mt-city">惠阳</a>
-                  <a href="//kp.meituan.com" class="link mt-city">开平</a>
-                  <a href="//taishan.meituan.com" class="link mt-city">台山</a>
-                  <a href="//heshan.meituan.com" class="link mt-city">鹤山</a>
-                  <a href="//lechang.meituan.com" class="link mt-city">乐昌</a>
-                  <a href="//yd.meituan.com" class="link mt-city">英德</a>
-                  <a href="//pn.meituan.com" class="link mt-city">普宁</a>
-                  <a href="//ns.meituan.com" class="link mt-city">南沙</a>
-                  <a href="//xingning.meituan.com" class="link mt-city">兴宁</a>
-                  <a href="//lufeng.meituan.com" class="link mt-city">陆丰</a>
-                  <a href="//wc.meituan.com" class="link mt-city">吴川</a>
-                  <a href="//lianjiang.meituan.com" class="link mt-city">廉江</a>
-                </div>
-                <div class="city-col">
-                  <a href="//gaozhou.meituan.com" class="link mt-city">高州</a>
-                  <a href="//sihui.meituan.com" class="link mt-city">四会</a>
-                  <a href="//huazhou.meituan.com" class="link mt-city">化州</a>
-                  <a href="//lianzhou.meituan.com" class="link mt-city">连州</a>
-                  <a href="//nanxiong.meituan.com" class="link mt-city">南雄</a>
-                  <a href="//xinyixy.meituan.com" class="link mt-city">信宜</a>
-                  <a href="//dianbai.meituan.com" class="link mt-city">电白</a>
-                  <a href="//xuwen.meituan.com" class="link mt-city">徐闻</a>
-                  <a href="//fogang.meituan.com" class="link mt-city">佛冈</a>
-                  <a href="//leizhou.meituan.com" class="link mt-city">雷州</a>
-                  <a href="//chaoan.meituan.com" class="link mt-city">潮安</a>
-                  <a href="//enping.meituan.com" class="link mt-city">恩平</a>
-                </div>
-                <div class="city-col">
-                  <a href="//boluoxian.meituan.com" class="link mt-city">博罗县</a>
-                  <a href="//yangshanxian.meituan.com" class="link mt-city">阳山县</a>
-                  <a href="//luodingshi.meituan.com" class="link mt-city">罗定市</a>
-                  <a href="//dongkengzhen.meituan.com" class="link mt-city">东坑镇</a>
-                  <a href="//qishizhen.meituan.com" class="link mt-city">企石镇</a>
-                  <a href="//xiegangzhen.meituan.com" class="link mt-city">谢岗镇</a>
-                </div>
-              </div>
-            </div>
+          <div class="city-choose">
+            <el-select v-model="city" :disabled="cityDisable" filterable placeholder="城市">
+              <el-option
+                v-for="item in cityList"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
           </div>
         </div>
       </div><div class="search">
         <h3 class="l-attr">
           直接搜索：
-        </h3><input type="text" placeholder="请输入城市中文或拼音" class="search-text" value="">
+        </h3>
+        <el-select v-model="input" placeholder="请输入城市中文名" filterable>
+          <el-option
+            v-for="item in allCities"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
       </div>
     </div>
     <div class="citylist">
@@ -250,26 +158,85 @@
 </template>
 
 <script>
-// import cityInfo from '@/assets/mock/city'
-// import request from '@/utils/request'
+import request from '@/utils/request'
 
 export default {
   data () {
-    // global.console.log(cityInfo)
     return {
-      // cityInfo,
+      province: '',
+      provinceList: [],
+      city: '',
+      cityList: [],
+      input: '',
+      allCities: [],
       cityAlphabet: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z']
     }
+  },
+  computed: {
+    cityDisable () {
+      return this.cityList.length === 0
+    }
+  },
+  watch: {
+    async province (newPvalue) {
+      const { status, data: { city } } = await request({
+        url: `/geo/province/${newPvalue}`,
+        method: 'get'
+      })
+      if (status === 200) {
+        this.cityList = city.map((item) => {
+          return {
+            value: item.id,
+            label: item.name
+          }
+        })
+        this.cvalue = ''
+      }
+    }
+  },
+  async mounted () {
+    // 获取省份
+    const { status, data: { province } } = await request({
+      url: '/geo/province',
+      method: 'get'
+    })
+    if (status === 200) {
+      this.provinceList = province.map((item) => {
+        return {
+          value: item.id,
+          label: item.name
+        }
+      })
+    }
+
+    // 获取所有城市
+    const { status: status1, data: { city } } = await request({
+      url: '/geo/city',
+      method: 'get'
+    })
+    if (status1 === 200) {
+      this.allCities = city.map((item) => {
+        return {
+          value: item.id,
+          label: item.name
+        }
+      })
+    }
+  },
+  methods: {
+
   }
-  // asyncData ({ params }) {
-  //   global.console.log(cityInfo)
-  //   return {
-  //     cityInfo
-  //   }
-  // }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/meituan-css/change_city.css'
+@import '@/assets/meituan-css/change_city.css';
+.page .op-area .choose-wrap .province-choose{
+  padding: 0 !important;
+  border: 0 !important;
+}
+.page .op-area .choose-wrap .city-choose{
+  padding: 0 !important;
+  border: 0 !important;
+}
 </style>
