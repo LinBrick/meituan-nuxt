@@ -30,27 +30,16 @@
 </template>
 
 <script>
-import request from '@/utils/request'
-
 export default {
   data () {
     return {
       city: this.$store.state.geo.position.city,
-      user: ''
+      user: this.$store.state.userInfo.username
     }
   },
   computed: {
     hasUser () {
       return this.user !== ''
-    }
-  },
-  async mounted (context) {
-    const { status, data } = await request({
-      url: '/users/getUser',
-      method: 'post'
-    })
-    if (status === 200) {
-      this.user = data.mobilePhone
     }
   }
 }

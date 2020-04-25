@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import userInfo from './modules/userInfo'
 import geo from './modules/geo'
 import home from './modules/home'
 
@@ -7,6 +8,7 @@ Vue.use(Vuex)
 
 const store = () => new Vuex.Store({
   modules: {
+    userInfo,
     geo,
     home
   },
@@ -14,6 +16,9 @@ const store = () => new Vuex.Store({
     async nuxtServerInit ({
       commit
     }, { req, app }) {
+      // 用户信息
+      const { status: status4, data: { mobilePhone } } = await app.$axios.post('/users/getUser')
+      commit('userInfo/setUsername', status4 === 200 ? mobilePhone : '')
       // 地址
       const { status, data: { province, city } } = await app.$axios.get('/geo/getPosition')
       commit('geo/setPosition', status === 200 ? { city, province } : { city: '', province: '' })

@@ -3,12 +3,10 @@ import LocalStrategy from 'passport-local'
 import UserModel from '../../dbs/models/users'
 
 passport.use(new LocalStrategy(async function (mobilePhone, password, done) {
-  global.console.log('执行到这里了吗？')
   const where = {
     mobilePhone
   }
   const result = await UserModel.findOne(where)
-  global.console.log(result)
   if (result !== null) {
     if (result.password === password) {
       return done(null, result)

@@ -14,7 +14,7 @@
       </div><a href="/xiuxianyule/" data-bid="b_a4enk0wd" data-lab="{&quot;custom&quot;:{&quot;index&quot;:2}}" class="link" target="_blank"><div class="item shadow pic-1" style="background-image:url(http://p0.meituan.net/codeman/e473bb428f070321269b23370ff02ba956209.jpg" /></a><div class="item banner-logincard">
         <div style="float:left">
           <div class="login-container">
-            <div class="default" style="display:block">
+            <div v-show="user === ''" class="default">
               <div class="head-img-row">
                 <img src="//s0.meituan.net/bs/fe-web-meituan/e350c4a/img/avatar.jpg" alt="">
               </div>
@@ -24,7 +24,7 @@
               <a class="btn-login" href="#">注册</a>
               <a class="btn-login" href="#">立即登录</a>
             </div>
-            <div class="default" style="display:none">
+            <div v-show="user !== ''" class="default">
               <div class="setting">
                 <a href="#" target="_blank"><div class="icon"><i class="iconfont icon-setting_iconx" /></div></a>
               </div>
@@ -86,6 +86,7 @@
 export default {
   data () {
     return {
+      user: this.$store.state.userInfo.username,
       bannerList: [
         {
           id: '111',
