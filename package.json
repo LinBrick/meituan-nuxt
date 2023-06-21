@@ -28,7 +28,7 @@
     "koa-router": "^8.0.8",
     "mongoose": "^5.9.10",
     "nodemailer": "^6.4.6",
-    "nuxt": "^2.0.0",
+    "nuxt": "^3.4.3",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
